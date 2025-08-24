@@ -1,0 +1,7 @@
+{
+  "name": "btc_tracker_app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

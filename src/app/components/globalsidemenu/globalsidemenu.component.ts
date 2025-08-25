@@ -11,7 +11,11 @@ import { RouterModule } from '@angular/router';
 })
 export class GlobalsidemenuComponent  implements OnInit {
 
-  constructor() { }
+  constructor() {
+
+   }
+
+
 
   ngOnInit() {}
 

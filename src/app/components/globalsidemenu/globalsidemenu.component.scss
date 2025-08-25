@@ -1,0 +1,45 @@
+div {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    margin: auto;
+
+}
+
+ion-img {
+    width: 100px;
+    filter: brightness(0);
+
+}
+
+ion-menu, ion-menu *{
+    --background: var(--ion-color-secondary);
+}
+
+ion-list, ion-item {
+    --color: var(--ion-color-light)
+}
+
+ion-list {
+    padding: 0;
+    background-color: transparent;
+}
+
+ion-item {
+    padding-top: 20px;
+    font-size: 1.25rem;
+}
+
+ion-item h1 {
+    margin: 0;
+    margin-left: 20px;
+    color: var(--ion-color-light);
+}
+
+ion-icon {
+    color: var(--ion-color-dark);
+    background-color: var(--ion-color-tertiary);
+    font-size: 40px;
+    border-radius: 8px;
+    padding: 10px;
+}

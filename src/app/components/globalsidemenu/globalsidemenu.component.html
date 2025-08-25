@@ -1,20 +1,21 @@
 <ion-menu side="start" contentId="main-content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Menu</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
+  <div>
+    <ion-img src="../../../assets/FlowyIcon.png.png" ></ion-img>
+    <h1>Flowy</h1>
+  </div>
   <ion-content>
-    <ion-list>
+    <ion-list lines="none">
       <ion-item routerLink="/home" routerDirection="root">
-        Introdução
+        <ion-icon src="../../../assets/icons/bootstrap_shield-check.svg"></ion-icon>
+        <h1>Introdução</h1>
       </ion-item>
       <ion-item routerLink="/mineracao" routerDirection="root">
-        Mineração
+        <ion-icon src="../../../assets/icons/bootstrap_gpu-card.svg"></ion-icon>
+        <h1>Mineração</h1>
       </ion-item>
       <ion-item routerLink="/tracker" routerDirection="root">
-        Simulação
+        <ion-icon src="../../../assets/icons/bootstrap_graph-up-arrow.svg"></ion-icon>
+        <h1>Simulação</h1>
       </ion-item>
     </ion-list>
   </ion-content>

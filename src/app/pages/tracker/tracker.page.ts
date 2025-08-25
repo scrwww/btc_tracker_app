@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonCard, IonCardContent } from '@ionic/angular/standalone';
 
 import { Chart, TimeScale, LinearScale, Tooltip, Legend, CategoryScale } from "chart.js";
 import "chartjs-chart-financial";
@@ -15,20 +15,30 @@ import { CandlestickController, CandlestickElement } from "chartjs-chart-financi
   templateUrl: './tracker.page.html',
   styleUrls: ['./tracker.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButton, IonCard, IonCardContent]
 })
 export class TrackerPage implements OnInit {
+
+  saldo: number = 10000;
+  position: number = 0;
+  estadoPosicao = false;
+  btn_vender: any = document.getElementById("btn_vender");
 
   constructor() { }
 
   ngOnInit() {
     renderChart().then(() => {
-      setInterval(updateChart, 60000);
+      setInterval(updateChart, 3000);
       console.log('Auto-update started (60s interval)');
     });
   }
 
 }
+
+function comprar() {
+        console.log()
+}
+
 
 interface RawApiResponse {
         t: number[]; // timestamps
@@ -61,12 +71,23 @@ function transformApiData(raw: RawApiResponse): FinancialDataPoint[] {
 async function fetchCandles(): Promise<FinancialDataPoint[]> {
         const timestamp = Date.now();
         const response = await fetch(`https://api.mercadobitcoin.net/api/v4/candles?symbol=BTC-BRL&resolution=1m&to=${timestamp}&countback=100`);
+        console.log(response)
+        const raw: RawApiResponse = await response.json();
+        console.log(response)
+        return transformApiData(raw);
+}
+
+async function fetchLatestCandle(): Promise<FinancialDataPoint[]> {
+        const timestamp = Date.now();
+        const response = await fetch(`https://api.mercadobitcoin.net/api/v4/candles?symbol=BTC-BRL&resolution=1m&to=${timestamp}&countback=1`);
+        console.log(response)
         const raw: RawApiResponse = await response.json();
         console.log(response)
         return transformApiData(raw);
 }
 
 let chart: Chart<"candlestick"> | null = null;
+
 
 async function renderChart() {
         const ctx = document.getElementById("candlestick") as HTMLCanvasElement;
@@ -95,17 +116,27 @@ async function renderChart() {
 
 async function updateChart() {
         if (!chart) return;
-
+      
         try {
-                const newCandles = await fetchCandles();
-                const dataset = chart.data.datasets[0];
-                if (dataset) {
-                        dataset.data = newCandles;
-                        chart.update('none');
-                        console.log(`Updated at ${new Date().toLocaleTimeString()}`);
-                }
+          const latestCandles = await fetchLatestCandle();
+          const latest = latestCandles[0];
+          const dataset = chart.data.datasets[0];
+      
+          if (!latest || !dataset || !Array.isArray(dataset.data)) return;
+      
+          const data = dataset.data as FinancialDataPoint[];
+          const last = data[data.length - 1];
+      
+          if (last && latest.x === last.x) {
+            data[data.length - 1] = latest;
+          } else if (last && latest.x > last.x) {
+            data.push(latest);
+            if (data.length > 100) data.shift();
+          }
+      
+          chart.update('none');
+          console.log(`Chart updat ${new Date().toLocaleTimeString()}`);
         } catch (error) {
-                console.error('Update failed:', error);
+          console.error('Error :', error);
         }
 }
-

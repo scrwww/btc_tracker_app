@@ -10,4 +10,8 @@ export const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full',
   },
+  {
+    path: 'tracker',
+    loadComponent: () => import('./pages/tracker/tracker.page').then( m => m.TrackerPage)
+  },
 ];

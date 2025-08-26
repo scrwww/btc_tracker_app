@@ -68,13 +68,26 @@ export class TrackerPage implements OnInit {
     c?.setAttribute('disabled', 'true');
   }
 
-  getMax() {}
+  async getMax() {
+    const max : number = this.saldo / await this.getLastSellPrice(); 
+  }
 
   vender() {
     const c = document.querySelector('#btn_comprar');
     c?.setAttribute('disabled', 'false');
     const v = document.querySelector('#btn_vender');
     v?.setAttribute('disabled', 'true');
+  }
+
+  async getLastSellPrice() : Promise<number> {
+    return new Promise(async (resolve, reject) => {
+      const response = await fetch(
+        `https://api.mercadobitcoin.net/api/v4/tickers?symbols=BTC-BRL`
+      );
+      const jsonData = await response.json();
+      const price : number = await jsonData[0].last;
+      resolve(price);
+    });
   }
 }
 

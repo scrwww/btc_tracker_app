@@ -48,16 +48,16 @@ import {
   ],
 })
 export class TrackerPage implements OnInit {
-  saldo: number = 10000;
+  saldo: number = 1000000;
   position: number = 0;
   estadoPosicao = false;
+  inputValue : any;
 
   constructor() {}
 
   ngOnInit() {
     renderChart().then(() => {
       setInterval(updateChart, 3000);
-      console.log('Auto-update started (60s interval)');
     });
   }
 
@@ -69,7 +69,9 @@ export class TrackerPage implements OnInit {
   }
 
   async getMax() {
-    const max : number = this.saldo / await this.getLastSellPrice(); 
+    console.log("a");
+    const max : number = this.saldo / await getLastSellPrice(); 
+    this.inputValue = max;
   }
 
   vender() {
@@ -79,16 +81,6 @@ export class TrackerPage implements OnInit {
     v?.setAttribute('disabled', 'true');
   }
 
-  async getLastSellPrice() : Promise<number> {
-    return new Promise(async (resolve, reject) => {
-      const response = await fetch(
-        `https://api.mercadobitcoin.net/api/v4/tickers?symbols=BTC-BRL`
-      );
-      const jsonData = await response.json();
-      const price : number = await jsonData[0].last;
-      resolve(price);
-    });
-  }
 }
 
 interface RawApiResponse {
@@ -109,6 +101,16 @@ Chart.register(
   Tooltip,
   Legend
 );
+  async function getLastSellPrice(): Promise<number> {
+    return new Promise(async (resolve, reject) => {
+      const response = await fetch(
+        `https://api.mercadobitcoin.net/api/v4/tickers?symbols=BTC-BRL`
+      );
+      const jsonData = await response.json();
+      const price: number = await jsonData[0].last;
+      resolve(price);
+    });
+  }
 
 function transformApiData(raw: RawApiResponse): FinancialDataPoint[] {
   return raw.t.map((timestamp, i) => ({
@@ -125,9 +127,7 @@ async function fetchCandles(): Promise<FinancialDataPoint[]> {
   const response = await fetch(
     `https://api.mercadobitcoin.net/api/v4/candles?symbol=BTC-BRL&resolution=1m&to=${timestamp}&countback=100`
   );
-  console.log(response);
   const raw: RawApiResponse = await response.json();
-  console.log(response);
   return transformApiData(raw);
 }
 
@@ -136,9 +136,7 @@ async function fetchLatestCandle(): Promise<FinancialDataPoint[]> {
   const response = await fetch(
     `https://api.mercadobitcoin.net/api/v4/candles?symbol=BTC-BRL&resolution=1m&to=${timestamp}&countback=1`
   );
-  console.log(response);
   const raw: RawApiResponse = await response.json();
-  console.log(response);
   return transformApiData(raw);
 }
 

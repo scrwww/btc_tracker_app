@@ -19,7 +19,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-input placeholder="Quantia de BTC a comprar"></ion-input>
+  <ion-input placeholder="Quantia de BTC a comprar" [(ngModel)]="inputValue" ></ion-input>
   <ion-button (click)="getMax()" id="btn_max">MAX</ion-button>
 
   <ion-button (click)="comprar()" id="btn_comprar" [disabled]="false">Comprar</ion-button>

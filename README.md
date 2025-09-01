@@ -1,20 +1,29 @@
-## Referência
+<h1 align="center"><img align="center" style="width: 100px; stroke: #ffffff" src="https://simpleicons.org/icons/bitcoin.svg"/>  CCOIN</h1>
+
+---
+
+
+## Dependências 📃
+
+- Chart.js
+- Node.js
+- Ionic CLI
+
+## Referência 📖
 
  - [Chart.js](https://www.chartjs.org/)
  - [Ionic Framework](https://ionicframework.com/)
  - [Angular](https://angular.dev/)
 
 
-## Dependências
-
-- Node.js
-- Chart.js
-
-## Ferramentas
+## Ferramentas 🛠
 ### Feito com Ionic Framework
+
 ![](https://skillicons.dev/icons?i=nodejs,ts,angular,scss,npm)
 
-## Rodando localmente
+
+
+## Rodando localmente 📥
 
 Clone o projeto
 
@@ -40,5 +49,5 @@ Inicie o servidor
   ionic serve
 ```
 
-# Preview - Simulação de Mercado
+# Preview - Simulação de Mercado 🎥
 ![Preview gif](https://raw.githubusercontent.com/scrwww/prj_eamt_btc/refs/heads/master/app_preview.gif)

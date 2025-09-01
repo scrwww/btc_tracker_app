@@ -1,8 +1,5 @@
 <h1 align="center"><img align="center" style="width: 100px; stroke: #ffffff" src="https://simpleicons.org/icons/bitcoin.svg"/>  CCOIN</h1>
 
----
-
-
 ## Dependências 📃
 
 - Chart.js

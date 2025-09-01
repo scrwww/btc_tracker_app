@@ -8,8 +8,12 @@
 ## Dependências
 
 - Node.js
-- Ionic Framework
 - Chart.js
+
+## Ferramentas
+### Feito com Ionic Framework
+![](https://skillicons.dev/icons?i=nodejs,ts,angular,scss,npm)
+
 ## Rodando localmente
 
 Clone o projeto

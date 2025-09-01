@@ -14,19 +14,32 @@
   <canvas id="candlestick" height="400"></canvas>
   <ion-card>
     <ion-card-content>
-    <h1>Saldo: R${{ saldo }}</h1>
-    <h1 *ngIf="estadoPosicao">Posição: {{ position }}</h1>
+      <div><b>Saldo:</b> <span class="valor">R$ {{ saldo | number:'1.2-2' }}</span></div>
+      <div><b>Preço BTC:</b> <span class="valor">R$ {{ preco | number:'1.2-2' }}</span></div>
+
+      <ion-input
+        type="number"
+        [(ngModel)]="inputValue"
+        placeholder="Qtd BTC"
+      ></ion-input>
+
+      <ion-button id="btn_comprar" (click)="comprar()">Comprar</ion-button>
+      <ion-button id="btn_vender" (click)="vender()" disabled>Vender</ion-button>
+      <ion-button (click)="getMax()">Max</ion-button>
+
+      <div *ngIf="estadoPosicao">
+        <b>BTC na posição:</b> <span class="valor">{{ btc | number:'1.6-6' }}</span><br>
+        <b>Preço de entrada:</b> <span class="valor">R$ {{ precoEntrada | number:'1.2-2' }}</span><br>
+        <b>Lucro/Prejuízo atual:</b>
+        <span [class.lucro]="lucroAtual >= 0" [class.prejuizo]="lucroAtual < 0">
+          R$ {{ lucroAtual | number:'1.2-2' }}
+        </span>
+      </div>
     </ion-card-content>
   </ion-card>
 
-  <ion-input placeholder="Quantia de BTC a comprar" [(ngModel)]="inputValue" ></ion-input>
-  <ion-button (click)="getMax()" id="btn_max">MAX</ion-button>
-
-  <ion-button (click)="comprar()" id="btn_comprar" [disabled]="false">Comprar</ion-button>
-  <ion-button (click)="vender()" id="btn_vender" [disabled]="true">Vender</ion-button>
 
 
 
-
-    <script type="module" src="./dist/index.js"></script>
+  <script type="module" src="./dist/index.js"></script>
 </ion-content>

@@ -1,6 +1,7 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
 :root {
+  color-scheme: light;
 	--ion-color-primary: #70a671;
 	--ion-color-primary-rgb: 112,166,113;
 	--ion-color-primary-contrast: #000000;
@@ -64,19 +65,44 @@
 	--ion-color-dark-shade: #0a141a;
 	--ion-color-dark-tint: #232e34;
 
-    --ion-background-color: #f3f8f3; 
+    --ion-background-color: #f3f8f3;
 
 }
 
-ion-card {
+
+@media (prefers-color-scheme: light) {
+  ion-card {
     --background: var(--ion-color-primary);
-}
+  }
 
-h1, h2, h3, p{
+  ion-button{
+    --color: var(--ion-color-light);
+    --background: var(--ion-color-primary-tint);
+  }
+
+  h1, h2, h3, p{
+    color: var(--ion-color-dark);
+  }
+
+  b {
+    color: var(--ion-color-light);
+  }
+
+  .valor {
     color: var(--ion-color-dark)
-}
+  }
 
-ion-input {
+  .lucro {
+    color: var(--ion-color-success);
+    font-weight: 600;
+  }
+
+  .prejuizo {
+    color: var(--ion-color-danger);
+    font-weight: 600;
+  }
+
+  ion-input {
     --color: var(--ion-color-dark) !important;
     --placeholder-color: #ddd !important;
     --placeholder-opacity: 0.8 !important;
@@ -85,4 +111,34 @@ ion-input {
     --padding-end: 10px !important;
     --padding-start: 10px !important;
     --padding-top: 10px !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  h1, h2, h3, p{
+    color: var(--ion-color-light)
+  }
+
+  .lucro {
+    color: var(--ion-color-success);
+    font-weight: 600;
+  }
+
+  .prejuizo {
+    color: var(--ion-color-danger);
+    font-weight: 600;
+  }
+
+
+  ion-input {
+    --color: var(--ion-color-light) !important;
+    --placeholder-color: #ddd !important;
+    --placeholder-opacity: 0.8 !important;
+
+    --padding-bottom: 10px !important;
+    --padding-end: 10px !important;
+    --padding-start: 10px !important;
+    --padding-top: 10px !important;
+  }
 }
